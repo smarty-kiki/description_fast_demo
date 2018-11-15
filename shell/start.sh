@@ -27,4 +27,4 @@ done
 /usr/bin/php /var/www/mvc_frame/public/cli.php migrate:install
 /usr/bin/php /var/www/mvc_frame/public/cli.php migrate
 
-tail -n 100 -f /var/log/nginx/access.log /var/log/nginx/error.log /var/log/php7.0-fpm.log /var/log/mysql/error.log /var/log/redis/redis-server.log
+tail -n 100 -f /var/log/nginx/access.log /var/log/nginx/error.log /var/log/php7.0-fpm.log /var/log/mysql/error.log /var/log/redis/redis-server.log /var/log/supervisor/*
