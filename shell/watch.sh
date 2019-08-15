@@ -23,6 +23,9 @@ if [[ $filename == *.yml ]];then
         echo $filename $event
 
         ENV=$env /usr/bin/php $PROJECT_PATH/public/cli.php entity:make-from-description --entity_name=$entity_name
+        /bin/bash $PROJECT_PATH/project/tool/classmap.sh $PROJECT_PATH/domain
+        ENV=$env /usr/bin/php /var/www/mvc_frame/public/cli.php migrate
+
         ENV=$env /usr/bin/php $PROJECT_PATH/public/cli.php crud:make-from-description --entity_name=$entity_name
         /bin/sed -i "/init\ controller/a\include\ CONTROLLER_DIR\.\'\/$entity_name\.php\'\;" $PROJECT_PATH/public/index.php
     fi
@@ -31,16 +34,18 @@ if [[ $filename == *.yml ]];then
         echo $filename $event
 
         ENV=$env /usr/bin/php $PROJECT_PATH/public/cli.php entity:make-from-description --entity_name=$entity_name
+        /bin/bash $PROJECT_PATH/project/tool/classmap.sh $PROJECT_PATH/domain
+        ENV=$env /usr/bin/php /var/www/mvc_frame/public/cli.php migrate
+
         ENV=$env /usr/bin/php $PROJECT_PATH/public/cli.php crud:make-from-description --entity_name=$entity_name
         /bin/sed -i "/init\ controller/a\include\ CONTROLLER_DIR\.\'\/$entity_name\.php\'\;" $PROJECT_PATH/public/index.php
     fi
 
     if [ "$event" == "DELETE" ];then
         echo $filename $event
+
+        /bin/bash $PROJECT_PATH/project/tool/classmap.sh $PROJECT_PATH/domain
+        ENV=$env /usr/bin/php /var/www/mvc_frame/public/cli.php migrate
     fi
-
-    /bin/bash $PROJECT_PATH/project/tool/classmap.sh $PROJECT_PATH/domain
-    ENV=$env /usr/bin/php /var/www/mvc_frame/public/cli.php migrate
-
 fi
 done
