@@ -54,8 +54,8 @@ then
             fi
 
         fi
-    ) &
 
-    rm -rf $LOCK_FILE
+        rm -rf $LOCK_FILE
+    ) &
 fi
 done
