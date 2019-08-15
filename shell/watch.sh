@@ -5,11 +5,12 @@ LOCK_FILE=/tmp/description_watch.lock
 env=development
 
 inotifywait -qm -e CREATE -e MODIFY -e DELETE $PROJECT_PATH/domain/description/ | while read -r directory event filename;do
-if [ ! -f $LOCK_FILE ]
+if [[ $filename == *.yml ]]
 then
-    echo $$ > $LOCK_FILE
-    (
-        if [[ $filename == *.yml ]];then
+    if [ ! -f $LOCK_FILE ]
+    then
+        echo $$ > $LOCK_FILE
+        (
 
             entity_name=${filename%.*}
 
@@ -53,9 +54,9 @@ then
                 ENV=$env /usr/bin/php /var/www/mvc_frame/public/cli.php migrate
             fi
 
-        fi
 
-        rm -rf $LOCK_FILE
-    ) &
+            rm -rf $LOCK_FILE
+        ) &
+    fi
 fi
 done
