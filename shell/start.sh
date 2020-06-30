@@ -23,4 +23,4 @@ date > /tmp/php_notice.log
 date > /tmp/php_module.log
 
 /bin/bash /var/www/mvc_frame/project/tool/development/after_env_start.sh
-/bin/bash /var/www/mvc_frame/project/tool/development/fast_demo_watch.sh
+/bin/sh   /var/www/mvc_frame/project/tool/development/fast_demo_watch.sh
