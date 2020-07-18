@@ -8,7 +8,6 @@ RUN apt-get install git -y && \
     chmod 777 /var/www/mvc_frame/view/blade && \
     /bin/bash /var/www/mvc_frame/project/tool/dep_build.sh link
 
-COPY ./inotify_watch.conf /etc/supervisor/conf.d/inotify_watch.conf
 COPY ./shell/start.sh /bin/start
 RUN chown root:root /bin/start && \
     chmod +x /bin/start
